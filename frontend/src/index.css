@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
-@theme{
-   --color-primary: #27AE60;
+@theme {
+  --color-primary: #27AE60;
 }
 
-.active hr{
-  @apply block
+/* custom utility for auto-fit grid */
+.grid-cols-auto {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-::-webkit-scrollbar{
-  @apply hidden
+.active hr {
+  @apply block;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
 }
