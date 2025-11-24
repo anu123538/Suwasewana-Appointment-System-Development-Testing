@@ -1,7 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100...900&display=swap');
+
 @import "tailwindcss";
 
 @theme {
   --color-primary: #27AE60;
+}
+*{
+  font-family: Outfit;
 }
 
 /* custom utility for auto-fit grid */
