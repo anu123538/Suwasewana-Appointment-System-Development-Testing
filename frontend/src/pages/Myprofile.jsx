@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import assets from '..//assets/assets';
+import { assets } from '../assets/assets';
 
-const MyProfile = () => {
+
+
+const Myprofile = () => {
   const [userData, setUserData] = useState({
     name: "Edward Vincent",
     image: assets.profile_pic,
