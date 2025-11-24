@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 
+
 import { AppContext } from '../context/AppContext';
 
 import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -20,7 +22,7 @@ const RelatedDoctors = (speciality,docId) => {
 
            const doctorData=doctors.filters((doc)=>doc.speciality===speciality && doc._id!==docId) 
 
-           setRelDocs(doctorsData)
+           setRelDocs(doctorData)
 
         }
 
