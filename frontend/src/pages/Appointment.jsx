@@ -1,10 +1,13 @@
-import React, { use, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { assets } from '../assets/assets'
 import { useState } from 'react'
 import RelatedDoctors from '../components/RelatedDoctors'
+
+
+
 
 
 
@@ -29,7 +32,7 @@ const Appointment = () => {
 
     for(let i=0;i<7;i++){
       //getting date with index
-      letcurrentDate=new Date(today)
+      let currentDate=new Date(today)
       currentDate.setDate(today.getDate()+i)
       //setting end times of data with index
       let endTime=new Date()
@@ -129,7 +132,7 @@ setDocSlots(prev=>([...prev,timeSlots]))
   {docSlots.length > 0 &&
     docSlots[slotIndex].map((slot, idx) => (
       <p onClick={()=>setSlotTime(slot.time)}
-        key={index}
+        key={idx}
         className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer 
           ${slot.time === slotTime ? 'bg-primary text-white' : 'text-gray-400 border border-gray-300'}
         `}
