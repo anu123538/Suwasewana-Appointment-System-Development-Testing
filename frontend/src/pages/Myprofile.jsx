@@ -18,6 +18,13 @@ const Myprofile = () => {
   })
 
   const [isEdit, setIsEdit] = useState(false)
+  const handleChange = (e, field) => {
+    setUserData((prev) => ({
+      ...prev,
+      [field]: e.target.value,
+    }));
+  };
+
   return (
     <div className='max-w-lg flex flex-col gap-2 text-sm'>
       <img className='w-36 rounded' src={userData.image} alt="" />
@@ -37,8 +44,8 @@ const Myprofile = () => {
          <p className='font-medium'>Phone:</p>
           {
             isEdit
-              ? <input type="text" value={userData.name} onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))} />
-              : <p className='text-orange-400'>{userData.phone}</p>
+              ? <input type="text" value={userData.phone} onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))} />
+              : <p className='text-gray-500'>{userData.phone}</p>
           }
           <p className='font-medium'>Address:</p>
           {
@@ -57,8 +64,8 @@ const Myprofile = () => {
         </div>
       </div>
 <div>
-    <p className='text-neutral-500 underline mt-5'>BASIC INFORMATION</p>
-<div className='grid grid-cols-(1fr, 3fr) gap-y-2.5 mt-3 text-neutral-700'>
+    <p className='text-neutral-500 underline mt-3'>BASIC INFORMATION</p>
+<div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-neutral-700'>
         <p className='font-medium'>Gender:</p>
         {
           isEdit
