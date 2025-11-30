@@ -18,15 +18,11 @@ const Login = () => {
         <p className='text-2xl font-semibold'>{state === 'Sign Up'? "Create Account" : "Login"}</p>
         <p>Please {state === 'Sign Up' ? "sign up" : "log in"}to book appointment</p>
         {
-          state === 'Sign Up' &&  <div className='w-full'>
-        <p>Full Name</p>
-        <input className='border border-zinc-300 rounded w-full p-2 mt-1' type='text' onChange={(e)=>setName(e.target.name)} value={name} required/>
-      </div>
+          state === 'Sign Up' && <div className='w-full'>
+            <p>Full Name</p>
+            <input className='border border-zinc-300 rounded w-full p-2 mt-1' type='text' onChange={(e) => setName(e.target.name)} value={name} required />
+          </div>
         }
-       <div className='w-full'>
-        <p>Full Name</p>
-        <input className='border border-zinc-300 rounded w-full p-2 mt-1' type='text' onChange={(e)=>setName(e.target.name)} value={name} required/>
-      </div>
       <div className='w-full'>
         <p>Email</p>
         <input className='border border-zinc-300 rounded w-full p-2 mt-1' type='email' onChange={(e)=>setEmail(e.target.name)} value={email} required/>
@@ -35,6 +31,7 @@ const Login = () => {
         <p>Password</p>
         <input className='border border-zinc-300 rounded w-full p-2 mt-1' type='password' onChange={(e)=>setPassword(e.target.name)} value={password} required />
       </div>
+        
       <button className='bg-primary text-white w-full py-2 rounded-md text-base'>{state === 'Sign Up'? "Create Account" : "Login"}</button>
       {
         state === 'Sign Up' ?
