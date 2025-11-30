@@ -40,7 +40,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
               navigate(`/appointment/${item._id}`);
               scrollTo(0, 0);
             }}
-            className="border border-green-300 rounded-xl overflow-hidden cursor-point hover:translate-y-[-10px] transition-all duration-500"
+            className="border border-green-300 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500"
             key={index}
           >
             <img className="bg-green-50 " src={item.image} alt="" />
