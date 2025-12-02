@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 const Doctors = () => {
   const { speciality } = useParams()
   const [filterDoc, setFilterDoc] = useState([])
+  const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate()
   
   const { doctors } = useContext(AppContext)
@@ -31,8 +32,10 @@ const Doctors = () => {
     <div>
       <p className="text-gray-800">Browse Through the doctors specialist.</p>
       <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
-        <div className="flex flex-col gap-4 text-sm text-gray-600">
-          <p
+        <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter ? 'bg-primary text text-white' : ''} `}
+          onClick={() => setShowFilter(prev => !prev)}>Filters</button>
+        <div className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex' }`}>
+        <p
             onClick={() =>
               speciality === "General_physician"
                 ? navigate("/doctors")
