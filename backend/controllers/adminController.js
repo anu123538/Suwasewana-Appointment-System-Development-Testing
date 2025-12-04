@@ -1,4 +1,7 @@
 import validator from 'validator'
+import bycrypt from 'bcrypt'
+import { v2 as cloudinary } from 'cloudinary'
+import doctorModel from '../models/doctorModel.js'
 
 // ApI for adding doctor
 const addDoctor = async (req, res) => {
@@ -21,10 +24,37 @@ const addDoctor = async (req, res) => {
             return res.json({ success: false, message: "Password is not strong enough. It should be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and symbols." })
         }
         
+        // hashing doctor password 
+        const salt = await bycrypt.genSalt(10)
+        const hashedPassword = await bycrypt.hash(password, salt)
 
-        
+        // upload image to cloudinary
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+            resource_type: "image"
+           })
+        const imageUrl = imageUpload.secure_url;
+
+        const doctorData = {
+            name,
+            email,
+            image: imageUrl,
+            password: hashedPassword,
+            speciality,
+            degree,
+            experience,
+            about,
+            fees,
+            address: JSON.parse(address),
+            date: Date.now(),
+
+        }
+const newDoctor = new doctorModel(doctorData)
+        await newDoctor.save()
+          res.json({ success: true, message: "Doctor added successfully" });
+                
     }catch (error) {
-        res.status(500).send({ message: "Error adding doctor", success: false, error })
+        console.log(error)
+        res.json({ success: false, message:error.message})
     }
 }
 
