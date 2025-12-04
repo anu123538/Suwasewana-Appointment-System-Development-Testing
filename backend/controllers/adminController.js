@@ -3,6 +3,7 @@ import bycrypt from 'bcrypt'
 import { v2 as cloudinary } from 'cloudinary'
 import doctorModel from '../models/doctorModel.js'
 
+
 // ApI for adding doctor
 const addDoctor = async (req, res) => {
     try {
@@ -57,5 +58,18 @@ const newDoctor = new doctorModel(doctorData)
         res.json({ success: false, message:error.message})
     }
 }
+// API for adding doctor
+const loginAdmin = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+        } else {
+            res.json({ success: false, message: "Invalid Admin Credentials" })
+        }
+    }catch (error) {
+        console.log(error)
+        res.json({ success: false, message:error.message})
+    }
+}
 
-export { addDoctor }
+export { addDoctor, loginAdmin }
