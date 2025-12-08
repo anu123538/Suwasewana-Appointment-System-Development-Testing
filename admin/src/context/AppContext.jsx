@@ -1,16 +1,15 @@
 import { createContext, useState } from "react";
 
-// Create the context
+
 const AppContext = createContext();
 
-// Create the provider component
 export const AppContextProvider = ({ children }) => {
   const [appState, setAppState] = useState({});
   
   const value = {
     appState,
     setAppState,
-    // Add other app-wide state/functions here
+   
   };
 
   return (
@@ -20,5 +19,5 @@ export const AppContextProvider = ({ children }) => {
   );
 };
 
-// Export the context for consumption
+
 export default AppContext;
