@@ -2,17 +2,12 @@ import { createContext, useState } from "react";
 
 export const DoctorContext = createContext();
 
-const DoctorContextProvider = ({ children }) => {
-  const [doctorData, setDoctorData] = useState(null);
-
-  const value = {
-    doctorData,
-    setDoctorData,
-  };
-
+const DoctorContextProvider = (props) => {
+  const value = {};
   return (
-    <DoctorContext.Provider value={value}>{children}</DoctorContext.Provider>
+    <DoctorContext.Provider value={value}>
+      {props.children}
+    </DoctorContext.Provider>
   );
 };
-
 export default DoctorContextProvider;

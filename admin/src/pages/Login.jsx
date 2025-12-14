@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { useContext } from "react";
-import { toast } from "react-hot-toast";
+import { toast } from "react-toastify";
 
 
 
@@ -42,7 +42,7 @@ const Login = () => {
     <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 bg-white shadow-xl rounded-lg">
         <p className="text-2xl font-semibold m-auto">
-          <span className="text-primary">Admin</span> Login
+          <span className="text-primary">{state}</span> Login
         </p>
         <div className="w-full">
           <p>Email</p>
