@@ -4,6 +4,8 @@ import { v2 as cloudinary } from 'cloudinary'
 import doctorModel from '../models/doctorModel.js'
 import jwt from 'jsonwebtoken'
 
+
+
 // ApI for adding doctor
 const addDoctor = async (req, res) => {
     try {
@@ -74,5 +76,16 @@ const loginAdmin = async (req, res) => {
         res.json({ success: false, message:error.message})
     }
 }
+// API to get all doctors list for admin panel
+const allDoctors = async (req, res) => {
+    try {
 
-export { addDoctor, loginAdmin }
+        const doctors = await doctorModel.find({}).select('-password')
+        res.json({ success: true, doctors })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+export { addDoctor, loginAdmin , allDoctors}
