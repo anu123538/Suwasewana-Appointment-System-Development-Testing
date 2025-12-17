@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
-import { assets } from '../assets/assets';
+import { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
+import axios from 'axios';
+
 
 
 
 const Myprofile = () => {
-  const [userData, setUserData] = useState({
-    name: "Edward Vincent",
-    image: assets.profile_pic,
-    email: "richardjameswap@gmail.com",
-    phone: '+1 123 456 7890',
-    address: {
-      line1: "57th Cross, Richmond ",
-      line2: "Circle, Church Road, London"
-    },
-    gender: 'Male',
-    dob: '2000-01-20'
-  })
+  const { userData, setUserData } = useContext(AppContext);
 
   const [isEdit, setIsEdit] = useState(false)
-  const handleChange = (e, field) => {
-    setUserData((prev) => ({
-      ...prev,
-      [field]: e.target.value,
-    }));
-  };
 
-  return (
+
+ 
+
+  return userData &&(
     <div className='max-w-lg flex flex-col gap-2 text-sm'>
       <img className='w-36 rounded' src={userData.image} alt="" />
 
