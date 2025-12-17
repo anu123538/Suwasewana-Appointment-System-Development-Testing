@@ -8,7 +8,7 @@ import { AppContext } from "../context/AppContext";
 
 const Navbar = () => {
     const navigate = useNavigate()
-    const {token, setToken} = useContext(AppContext)
+    const {token, setToken,userData} = useContext(AppContext)
 
     const [showMenu, setShowMenu] = useState(false)
     const logout = () => {
@@ -44,11 +44,12 @@ const Navbar = () => {
         </NavLink>
       </ul>
       <div className="flex items-center gap-4">
-        {token ? (
+        {
+          token && userData  ?
           <div className="flex items-center gap-2 cursor-pointer group relative">
             <img
               className="w-8 rounded-full"
-              src={assets.profile_pic}
+              src={userData.image}
               alt="profile"
             />
             <img className="w-2.5" src={assets.dropdown_icon} alt="dropdown" />
@@ -75,14 +76,14 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-        ) : (
+         : 
           <button
             onClick={() => navigate("/login")}
             className="bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block"
           >
             Create Account
           </button>
-        )}
+      }
         <img
           onClick={() => setShowMenu(true)}
           className="w-6 md:hidden cursor-pointer"
