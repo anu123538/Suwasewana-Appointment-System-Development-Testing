@@ -53,74 +53,81 @@ const registerUser = async (req, res) => {
     }
 }
     //API for user login
-    const loginUser = async (req, res) => {
-        try{
-            const { email, password } = req.body
-            const user = await userModel.findOne({ email })
+   const loginUser = async (req, res) => {
+     try {
+       const { email, password } = req.body;
 
-            if(!user){
-               return res.json({ success: false, message: "User does not exist" })
-            }
-            const isMatch = await bcrypt.compare(password, user.password)
-            if(!isMatch){
-                const token = jwt.sign(
-                    { id: user._id },
-                    process.env.JWT_SECRET
-                )
-                res.json({ success: true, token })
-            }else{
-                res.json({ success: false, message: "Invalid Credentials" })
-            }
+       const user = await userModel.findOne({ email });
+       if (!user) {
+         return res.json({ success: false, message: "User does not exist" });
+       }
 
-        }catch(error){
-            console.log(error)
-            res.json({ success: false, message: error.message })
-        }
-    }
+       const isMatch = await bcrypt.compare(password, user.password);
+
+       if (!isMatch) {
+         return res.json({ success: false, message: "Invalid Credentials" });
+       }
+
+       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+         expiresIn: "7d",
+       });
+
+       res.json({ success: true, token });
+     } catch (error) {
+       console.log(error);
+       res.json({ success: false, message: error.message });
+     }
+   };
+
 
     // API to get user profile data
-    const getProfile = async(req,res) => {
-        try{
-            const {userId} = req.body
-            const userData = await userModel.findById(userId).select('-password')
+    const getProfile = async (req, res) => {
+      try {
+        const userId = req.userId; // ✅ CORRECT
 
-            res.json({success:true,userData})
-        } catch(error){
-            console.log(error)
-            res.json({ success: false, message: error.message })
-        }
-}
+        const userData = await userModel.findById(userId).select("-password");
+
+        res.json({ success: true, userData });
+      } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+      }
+    };
+
 //API to update user profile data
 const updateProfile = async (req, res) => {
-    try {
-        const { userId, name, phone, address, dob, gender } = req.body
-        const imageFile = req.file
+  try {
+    const userId = req.userId; // ✅ from auth middleware
+    const { name, phone, address, dob, gender } = req.body;
+    const imageFile = req.file;
 
-        if (!name || !phone || !dob || !gender) {
-            return res.json({ success: false, message: "Missing Details" })
-        }
-        await userModel.findByIdAndUpdate(userId, {
-            name,
-            phone,
-            address: JSON.parse(address),
-            dob,
-            gender
-        })
-        if (imageFile) {
-
-            // upload image to cloudinary
-            const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" })
-            const imageUrl = imageUpload.secure_url
-
-            await userModel.findByIdAndUpdate(userId, {
-                image: imageUrl
-            })
-        }
-        res.json({ success: true, message: "Profile Updated Successfully" })
-    } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+    if (!name || !phone || !dob || !gender) {
+      return res.json({ success: false, message: "Missing Details" });
     }
-}
+
+    await userModel.findByIdAndUpdate(userId, {
+      name,
+      phone,
+      address: JSON.parse(address),
+      dob,
+      gender,
+    });
+
+    if (imageFile) {
+      const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+        resource_type: "image",
+      });
+
+      await userModel.findByIdAndUpdate(userId, {
+        image: imageUpload.secure_url,
+      });
+    }
+
+    res.json({ success: true, message: "Profile Updated Successfully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export { registerUser, loginUser, getProfile, updateProfile }
