@@ -8,13 +8,13 @@ const authUser = (req, res, next) => {
     if (!token) {
       return res.status(401).json({
         success: false,
-        message: "Not Authorized Login Again",
+        message: "Not Authorized. Login Again",
       });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ DO NOT use req.body
+    // Attach userId to request
     req.userId = decoded.id;
 
     next();
@@ -22,7 +22,7 @@ const authUser = (req, res, next) => {
     console.log("JWT ERROR:", error.message);
     return res.status(401).json({
       success: false,
-      message: "Token Expired Login Again",
+      message: "Token Expired. Login Again",
     });
   }
 };
