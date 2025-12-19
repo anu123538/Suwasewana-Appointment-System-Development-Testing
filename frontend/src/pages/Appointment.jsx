@@ -46,26 +46,30 @@ const Appointment = () => {
         currentDate.setMinutes(0);
       }
 
-      const dailySlots = [];
+      let timeSlots = [];
       while (currentDate < endTime) {
-        const formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+       let formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        const day = currentDate.getDate();
-        const month = currentDate.getMonth() + 1;
-        const year = currentDate.getFullYear();
-        const slotDateKey = `${day}_${month}_${year}`;
+       let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1;
+        let year = currentDate.getFullYear();
 
-        // Check if slot is already booked
-        const isSlotAvailable = !docInfo.slots_booked?.[slotDateKey]?.includes(formattedTime);
+
+        const slotDate = day + "_" + month + "_" + year
+        const slotTime = formattedTime;
+        
+
+        
+        const isSlotAvailable = docInfo.slots_booked[slotDate] && docInfo.slots_booked[slotDate].includes(slotTime) ? false : true;
 
         if (isSlotAvailable) {
-          dailySlots.push({ datetime: new Date(currentDate), time: formattedTime });
+          timeSlots.push({ datetime: new Date(currentDate), time: formattedTime });
         }
 
         currentDate.setMinutes(currentDate.getMinutes() + 30);
       }
 
-      if (dailySlots.length > 0) slots.push(dailySlots);
+      if (timeSlots.length > 0) slots.push(timeSlots);
     }
 
     setDocSlots(slots);
@@ -78,36 +82,38 @@ const Appointment = () => {
       return navigate('/login');
     }
 
-    if (!slotTime) {
-      toast.warn('Select a slot first');
-      return;
-    }
-
     try {
-      const date = docSlots[slotIndex][0].datetime;
-      const day = date.getDate();
-      const month = date.getMonth() + 1;
-      const year = date.getFullYear();
-      const slotDate = `${day}_${month}_${year}`;
+      const date = docSlots[slotIndex][0].datetime
+      
+      let day = date.getDate()
+      let month = date.getMonth() + 1
+      let year = date.getFullYear()
 
-      const { data } = await axios.post(
-        `${backendUrl}/api/user/book-appointment`,
-        { docId, slotDate, slotTime },
-        { headers: { token } }
-      );
-
+      const slotDate = day + "_" + month + "_" + year
+      const { data } = await axios.post(backendUrl + '/api/user/book-appointment', {
+        docId,
+        slotDate,
+        slotTime
+      }, {
+        headers: {
+          token
+        }
+      })
       if (data.success) {
-        toast.success(data.message);
-        getDoctorsData();
-        navigate('/my-appointments');
+        toast.success(data.message)
+        getDoctorsData()
+        navigate('/my-appointments')
       } else {
-        toast.error(data.message);
+        toast.error(data.message)
       }
+    
     } catch (error) {
       console.log(error);
       toast.error(error.message);
     }
   };
+
+
 
   useEffect(() => {
     fetchDocInfo();
