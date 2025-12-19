@@ -134,6 +134,7 @@ delete docData.slots_booked;
       docData,
     amount: docData.fees,
       slotTime,
+    slotDate,
       date: Date.now(),
     
     }
@@ -154,7 +155,7 @@ delete docData.slots_booked;
 //API to get user appointmets for frontend
 const listAppointment = async (req, res) => {
   try {
-    const userId = req.body;
+    const userId = req.userId;
     const appointments = await appointmentModel.find({ userId });
     res.json({ success: true, appointments })
   } catch (error) {
