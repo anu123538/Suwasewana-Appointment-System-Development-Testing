@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
-  // Replace with your actual logo path: assets.logo
-  const logoUrl =
-    "https://via.placeholder.com/160x40/27AE60/FFFFFF?text=Suwasewana";
+  // Use local logo asset to avoid external placeholder DNS issues
+  const logoUrl = assets.logo;
 
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([
