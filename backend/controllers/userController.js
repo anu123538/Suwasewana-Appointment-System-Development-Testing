@@ -6,6 +6,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import doctorModel from '../models/doctorModel.js';
 import appointmentModel from '../models/appointmentModel.js';
 
+
 // Register User
 const registerUser = async (req, res) => {
   try {
@@ -99,54 +100,62 @@ const bookAppointment = async (req, res) => {
     const userId = req.userId; // ✅ use userId from middleware
     const { docId, slotDate, slotTime } = req.body;
 
-    if (!userId) return res.status(401).json({ success: false, message: "Unauthorized" });
-
-    const userData = await userModel.findById(userId).select("-password");
+    
     const docData = await doctorModel.findById(docId).select("-password");
 
-    if (!docData.available) return res.json({ success: false, message: "Doctor not available" });
+    if (!docData.available) {
+      return res.json({ success: false, message: "Doctor not available" });
+    }
+    let slots_booked = docData.slots_booked
 
-    // Handle slots
-    let slotsBooked = docData.slots_booked || {};
-    if (slotsBooked[slotDate]) {
-      if (slotsBooked[slotDate].includes(slotTime)) {
+    // Checking for slot availability
+
+    if (slots_booked[slotDate]) {
+      if (slots_booked[slotDate].includes(slotTime)) {
         return res.json({ success: false, message: "Slot not available" });
       } else {
-        slotsBooked[slotDate].push(slotTime);
+        slots_booked[slotDate].push(slotTime);
       }
     } else {
-      slotsBooked[slotDate] = [slotTime];
+      slots_booked[slotDate] = []
+      slots_booked[slotDate].push(slotTime);
     }
 
-    delete docData.slots_booked;
+    const userData = await userModel.findById(userId).select("-password");
 
-    const newAppointment = new appointmentModel({
+    
+   
+delete docData.slots_booked;
+
+    const appointmentData = {
       userId,
-      userData,
       docId,
+      userData,
       docData,
-      slotDate,
+    amount: docData.fees,
       slotTime,
-      amount: docData.fees,
+    slotDate,
       date: Date.now(),
-      cancelled: false,
-      payment: false,
-      isCompleted: false,
-    });
+    
+    }
 
-    await newAppointment.save();
-    await doctorModel.findByIdAndUpdate(docId, { slots_booked: slotsBooked });
-
-    res.json({ success: true, message: "Appointment Booked" });
+    const newAppointment = new appointmentModel(appointmentData)
+    await newAppointment.save()
+    // save new slots data in docData
+    await doctorModel.findByIdAndUpdate(docId, {slots_booked});
+     res.json({ success: true, message: "Appointment Booked Successfully" });
+    
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+    
 //API to get user appointmets for frontend
 const listAppointment = async (req, res) => {
   try {
-    const userId = req.body;
+    const userId = req.userId;
     const appointments = await appointmentModel.find({ userId });
     res.json({ success: true, appointments })
   } catch (error) {

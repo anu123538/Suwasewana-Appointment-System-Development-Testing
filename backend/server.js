@@ -16,7 +16,12 @@ connectCloudinary()
 
 // mioddlewares 
 app.use(express.json())
-app.use(cors())
+// Enable CORS for frontend/admin
+app.use(cors({
+    origin: "*",
+    methods: ["GET","POST","PUT","DELETE"],
+    credentials: true
+}))
 
 // api routes 
 app.use('/api/admin', adminRouter)

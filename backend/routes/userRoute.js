@@ -13,4 +13,5 @@ userRouter.post('/update-profile', authUser, upload.single('image'), updateProfi
 userRouter.post('/book-appointment', authUser, bookAppointment);
 userRouter.get('appointments', authUser, listAppointment);
 userRouter.post('/cancel-appointment', authUser, cancelAppointment);
+userRouter.get('/appointments', authUser, listAppointment);
 export default userRouter;
