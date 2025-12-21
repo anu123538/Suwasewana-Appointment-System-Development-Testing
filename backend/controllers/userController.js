@@ -195,43 +195,44 @@ const cancelAppointment = async (req, res) => {
   }
 };
 
-// PayHere payment (TEST)
 const paymentPayHere = async (req, res) => {
   try {
-    const userId = req.userId;
     const { appointmentId } = req.body;
 
     const appointment = await appointmentModel.findById(appointmentId);
-
     if (!appointment || appointment.cancelled) {
-      return res.json({ success: false, message: "Appointment not found" });
+      return res.json({ success: false, message: "Invalid appointment" });
     }
 
-    const paymentData = {
-      sandbox: true,
-      merchant_id: "122XXXX", // TEST merchant id from PayHere
-      return_url: "http://localhost:5173/payment-success",
-      cancel_url: "http://localhost:5173/payment-cancel",
-      notify_url: "http://localhost:5000/api/user/payhere-notify",
+    const paymentUrl =
+ "https://sandbox.payhere.lk/pay/checkoutJ?"+
+  new URLSearchParams({
+    merchant_id: "121XXXX",
+    return_url: "http://localhost:5173/payment-success",
+    cancel_url: "http://localhost:5173/payment-cancel",
+    notify_url: "https://suwasewana.vercel.app",
 
-      order_id: appointmentId,
-      items: "Doctor Appointment",
-      amount: appointment.amount,
-      currency: "LKR",
 
-      first_name: appointment.userData.name,
-      email: appointment.userData.email,
-      phone: appointment.userData.phone || "0770000000",
-      address: "Sri Lanka",
-      city: "Colombo",
-      country: "Sri Lanka",
-    };
+        order_id: appointmentId,
+        items: "Doctor Appointment",
+        amount: appointment.amount,
+        currency: "LKR",
 
-    res.json({ success: true, paymentData });
+        first_name: "Test",
+        last_name: "User",
+        email: "test@gmail.com",
+        phone: "0771234567",
+        address: "Sri Lanka",
+        city: "Colombo",
+        country: "Sri Lanka",
+      }).toString();
+
+    res.json({ success: true, paymentUrl });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
 };
+
 
 export {
   registerUser,
