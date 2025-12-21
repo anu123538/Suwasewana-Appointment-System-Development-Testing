@@ -63,12 +63,45 @@ const MyAppointments = () => {
       toast.error(error.message)
     }
   }
+
+  const payAppointment = async (appointmentId) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/user/payment-payhere",
+        { appointmentId },
+        { headers: { token } }
+      );
+
+      if (data.success) {
+        window.payhere.startPayment(data.paymentData);
+      }
+    } catch (error) {
+      toast.error("Payment failed");
+    }
+  };
+
   useEffect(() => {
     if(token)
     // eslint-disable-next-line react-hooks/set-state-in-effect
     getUserAppointments()
   }, [token])
+  
+useEffect(() => {
+  if (window.payhere) {
+    window.payhere.onCompleted = function (orderId) {
+      toast.success("Payment Successful!");
+      getUserAppointments();
+    };
 
+    window.payhere.onDismissed = function () {
+      toast.info("Payment cancelled");
+    };
+
+    window.payhere.onError = function (error) {
+      toast.error("Payment error");
+    };
+  }
+}, []);
 
 
   return (
@@ -95,7 +128,7 @@ const MyAppointments = () => {
 
   {!item.cancelled && (
     <>
-      <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-primary hover:text-white transition-all duration-300'>
+      <button onClick={() => payAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-primary hover:text-white transition-all duration-300'>
         Pay Online
       </button>
 
