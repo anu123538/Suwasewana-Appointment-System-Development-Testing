@@ -4,12 +4,14 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { get } from 'mongoose'
 
 
 
 const MyAppointments = () => {
-  const { backendUrl, token } = useContext(AppContext)
+  const { backendUrl, token, getDoctorsData } = useContext(AppContext)
   const [appointments, setAppointments] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   
   const slotDateFormat = (slotDate) => {
@@ -44,8 +46,26 @@ const MyAppointments = () => {
       toast.error(error.message)
     }
   }
+  const CancelAppointment = async(appointmentId) =>{
+    try {
+      const {data} = await axios.post(backendUrl + '/api/user/cancel-appointment', {appointmentId}, { headers: { token } })
+      if(data.success){
+        toast.success(data.message)
+        getUserAppointments()
+        getDoctorsData()
+      }
+      else{
+        toast.error(data.message)
+      }
+    }
+    catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    }
+  }
   useEffect(() => {
     if(token)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     getUserAppointments()
   }, [token])
 
@@ -73,8 +93,9 @@ const MyAppointments = () => {
 
         </div>
         <div className='flex flex-col gap-2 justify-end'>
-          <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border  hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
-          <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
+         {item.cancelled && <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border  hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>} 
+         {item.cancelled && <button onClick ={() => CancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>}
+         {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>}
           </div>
       </div>
         ))}
