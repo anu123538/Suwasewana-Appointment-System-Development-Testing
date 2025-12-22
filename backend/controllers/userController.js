@@ -206,7 +206,7 @@ const paymentPayHere = async (req, res) => {
 
     const paymentData = {
       sandbox: true,
-      merchant_id: "121XXXX", // sandbox merchant id
+      merchant_id: "1233260", // sandbox merchant id
       return_url: "http://localhost:5173/payment-success",
       cancel_url: "http://localhost:5173/payment-cancel",
       notify_url: "https://suwasewana.vercel.app",
