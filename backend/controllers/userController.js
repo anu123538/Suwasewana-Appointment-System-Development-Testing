@@ -204,28 +204,29 @@ const paymentPayHere = async (req, res) => {
       return res.json({ success: false, message: "Invalid appointment" });
     }
 
-    const paymentData = {
-      sandbox: true,
-      merchant_id: "1233260", // sandbox merchant id
-      return_url: "http://localhost:5173/payment-success",
-      cancel_url: "http://localhost:5173/payment-cancel",
-      notify_url: "https://suwasewana.vercel.app",
+    const paymentUrl =
+      "https://sandbox.payhere.lk/pay/checkout?" +
+      new URLSearchParams({
+        merchant_id: "1233260", // ✅ CORRECT
+        return_url: "http://localhost:5173/payment-success",
+        cancel_url: "http://localhost:5173/payment-cancel",
+        notify_url: "https://suwasewana-vgqa.vercel.app/api/payhere-notify",
 
-      order_id: appointmentId,
-      items: "Doctor Appointment",
-      amount: appointment.amount,
-      currency: "LKR",
+        order_id: appointmentId,
+        items: "Doctor Appointment",
+        amount: appointment.amount,
+        currency: "LKR",
 
-      first_name: "Test",
-      last_name: "User",
-      email: "test@gmail.com",
-      phone: "0771234567",
-      address: "Colombo",
-      city: "Colombo",
-      country: "Sri Lanka",
-    };
+        first_name: "Test",
+        last_name: "User",
+        email: "test@gmail.com",
+        phone: "0771234567",
+        address: "Sri Lanka",
+        city: "Colombo",
+        country: "Sri Lanka",
+      }).toString();
 
-    res.json({ success: true, paymentData });
+    res.json({ success: true, paymentUrl });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
