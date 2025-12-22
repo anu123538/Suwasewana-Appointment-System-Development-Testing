@@ -73,14 +73,13 @@ const payAppointment = async (appointmentId) => {
     );
 
     if (data.success) {
-      window.location.href = data.paymentUrl;
-    } else {
-      toast.error(data.message);
+      window.payhere.startPayment(data.paymentData);
     }
   } catch (error) {
     toast.error("Payment failed");
   }
 };
+
 
   useEffect(() => {
     if(token)
@@ -88,6 +87,21 @@ const payAppointment = async (appointmentId) => {
     getUserAppointments()
   }, [token])
 
+
+  useEffect(() => {
+    // PayHere payment completion handler
+    window.payhere.onCompleted = function (orderId) {
+  alert("Payment Successful! Order ID: " + orderId);
+};
+
+window.payhere.onDismissed = function () {
+  alert("Payment cancelled");
+};
+
+window.payhere.onError = function (error) {
+  alert("Payment error: " + error);
+};
+  }, []);
 
 
 
