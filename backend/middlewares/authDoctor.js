@@ -3,25 +3,24 @@ import jwt from "jsonwebtoken";
 // doctor authentication middleware
 const authDoctor = (req, res, next) => {
   try {
-    const {dToken} = req.headers;
+    const token = req.headers.dToken; // match frontend
 
-    if (!dToken) {
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Not Authorized. Login Again",
       });
     }
 
-    const token_decoded = jwt.verify(dToken, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Attach userId to request
-  req.doctorId = decoded.doctorId;
-
+    // Attach doctorId to request
+    req.body.docId = decoded.doctorId; // match payload
 
     next();
   } catch (error) {
-      console.log(error)
-    res.json({
+    console.log(error);
+    res.status(401).json({
       success: false,
       message: error.message,
     });
