@@ -1,12 +1,13 @@
 import express from "express";
 import {
   changeAvailability,
-  doctorList,
+  doctorList,loginDoctor
 } from "../controllers/doctorController.js";
 
-const router = express.Router();
+const doctorRouter = express.Router();
 
-router.post("/change-availability", changeAvailability);
-router.get("/list", doctorList);
+doctorRouter.post("/change-availability", changeAvailability);
+doctorRouter.get("/list", doctorList)
+doctorRouter.post("/login", loginDoctor)
 
-export default router;
+export default doctorRouter;
