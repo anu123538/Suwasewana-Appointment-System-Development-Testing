@@ -6,7 +6,7 @@ import {
 
 const doctorRouter = express.Router();
 
-doctorRouter.post("/change-availability", changeAvailability);
+
 doctorRouter.get("/list", doctorList)
 doctorRouter.post("/login", loginDoctor)
 
