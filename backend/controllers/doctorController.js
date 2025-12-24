@@ -58,8 +58,8 @@ const loginDoctor = async (req, res) => {
 // API to get  doctor appointment for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
-    const doctorId = req.doctorId;
-const appointments = await appointmentModel.find({ doctorId });
+    const docId = req.docId; // ✅ matches DB
+    const appointments = await appointmentModel.find({ docId });
 
     res.json({ success: true, appointments });
   } catch (error) {
@@ -67,5 +67,6 @@ const appointments = await appointmentModel.find({ doctorId });
     res.json({ success: false, message: error.message });
   }
 };
+
 
 export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor };

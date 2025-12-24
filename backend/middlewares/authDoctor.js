@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 
 // doctor authentication middleware
+import jwt from "jsonwebtoken";
+
 const authDoctor = (req, res, next) => {
   try {
     const dtoken = req.headers.dtoken;
@@ -12,10 +14,10 @@ const authDoctor = (req, res, next) => {
       });
     }
 
-   const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
-   req.doctorId = decoded.doctorId; // ✅ FIXED
-   next();
+    const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
 
+    req.docId = decoded.doctorId; // ✅ store as docId
+    next();
   } catch (error) {
     console.log("JWT ERROR:", error.message);
     return res.status(401).json({
@@ -24,6 +26,5 @@ const authDoctor = (req, res, next) => {
     });
   }
 };
-
 
 export default authDoctor;
