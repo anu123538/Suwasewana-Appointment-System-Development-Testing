@@ -17,7 +17,7 @@ const [appointments, setAppointments] = useState([]);
       const { data } = await axios.get(
         backendUrl + "/api/doctor/appointments",
         {
-          headers: { dToken },
+          headers: { dtoken: dToken },
         }
       );
       if (data.success) {
