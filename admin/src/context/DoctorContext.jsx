@@ -14,9 +14,12 @@ const [appointments, setAppointments] = useState([]);
  
   const getAppointments = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/doctor/appointments", {
-        headers: { dToken }
-      });
+      const { data } = await axios.get(
+        backendUrl + "/api/doctor/appointments",
+        {
+          headers: { dtoken: dToken },
+        }
+      );
       if (data.success) {
         setAppointments(data.appointments.reverse());
         console.log(data.appointments.reverse());

@@ -5,7 +5,7 @@ import appointmentModel from "../models/appointmentModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
-    const { doctorId } = req.body;
+    const doctorId = req.doctorId;
 
     const docData = await doctorModel.findById(doctorId);
     await doctorModel.findByIdAndUpdate(doctorId, {
@@ -59,7 +59,8 @@ const loginDoctor = async (req, res) => {
 const appointmentsDoctor = async (req, res) => {
   try {
     const doctorId = req.doctorId;
-    const appointments = await appointmentModel.find({ doctorId: doctorId });
+const appointments = await appointmentModel.find({ doctorId });
+
     res.json({ success: true, appointments });
   } catch (error) {
     console.log(error);
