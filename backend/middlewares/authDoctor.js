@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 // doctor authentication middleware
 const authDoctor = (req, res, next) => {
   try {
-    const { dtoken } = req.headers;
+    const dtoken = req.headers.token;
 
     if (!dtoken) {
       return res.status(401).json({
@@ -14,15 +14,15 @@ const authDoctor = (req, res, next) => {
 
     const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
 
-    // Attach doctorId to request
-    req.body.docId = decoded.doctorId; // match payload
+    // Attach userId to request
+    req.docId = decoded.id;
 
     next();
   } catch (error) {
-    console.log(error);
-    res.status(401).json({
+    console.log("JWT ERROR:", error.message);
+    return res.status(401).json({
       success: false,
-      message: error.message,
+      message: "Token Expired. Login Again",
     });
   }
 };
