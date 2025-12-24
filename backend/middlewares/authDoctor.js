@@ -14,7 +14,9 @@ const authDoctor = (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-   req.docId = decoded.docId; 
+    // ✅ FIX HERE
+    req.docId = decoded.doctorId;
+
     next();
   } catch (error) {
     console.log(error);

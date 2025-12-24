@@ -58,46 +58,50 @@ const loginDoctor = async (req, res) => {
 // API to get  doctor appointment for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
-    const doctorId = req.docId;
-    const appointments = await appointmentModel.find({ docId });
+    const doctorId = req.doctorId;
+
+    const appointments = await appointmentModel.find({
+      docId: doctorId, // ✅ DB field
+    });
 
     res.json({ success: true, appointments });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
 
+
 // API to get dashbord data for doctor panel
 const doctorDashboard = async (req, res) => {
   try {
-    const { doctorId } = req.body;
-    const appointments = await appointmentModel.find({ doctorId });
-    let earnings = 0;
-    appointments.map((item) => {
-      if (item.isCompleted || item.payment) {
-        earnings += item.amount
-      }
-    })
+    const doctorId = req.doctorId;
 
-    let patients = []
-    appointments.map((item) => {
-      if (!patients.includes(item.userId)) {
-        patients.push(item.userId)
+    const appointments = await appointmentModel.find({
+      docId: doctorId, // ✅ correct
+    });
+
+    let earnings = 0;
+    let patients = new Set();
+
+    appointments.forEach((item) => {
+      if (item.payment || item.isCompleted) {
+        earnings += item.amount;
       }
-    })
+      patients.add(item.userId.toString());
+    });
 
     const dashData = {
       earnings,
       appointments: appointments.length,
-      patients: patients.length,
-      latestAppointments: appointments.reverse().slice(0,5)
-    }
+      patients: patients.size,
+      latestAppointments: appointments.reverse().slice(0, 5),
+    };
+
+    res.json({ success: true, dashData });
   } catch (error) {
-    console.log(error);
     res.json({ success: false, message: error.message });
   }
-}
+};
 
 
 
