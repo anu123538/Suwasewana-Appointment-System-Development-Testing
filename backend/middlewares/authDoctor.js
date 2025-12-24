@@ -3,18 +3,18 @@ import jwt from "jsonwebtoken";
 
 const authDoctor = (req, res, next) => {
   try {
-    const { dtoken } = req.headers
+    const token = req.headers.dtoken;
 
-    if (!dtoken) {
+    if (!token) {
       return res.status(401).json({
         success: false,
         message: "Not Authorized. Login Again",
       });
     }
 
-    const token_decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.body.docId= token_decoded.id; // ✅ store as docId
+   req.docId = decoded.docId; 
     next();
   } catch (error) {
     console.log(error);

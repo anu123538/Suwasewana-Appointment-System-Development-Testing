@@ -4,6 +4,7 @@ import { DoctorContext } from '../../context/DoctorContext'
 import { AppContext } from '../../context/AppContext'
 import { assets } from '../../assets/assets'
 
+
 const DoctorAppointments = () => {
     const {dToken,appointments,getAppointments} = useContext(DoctorContext);
     const { calculateAge, slotDateFormat, currency } = useContext(AppContext);

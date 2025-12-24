@@ -58,7 +58,7 @@ const loginDoctor = async (req, res) => {
 // API to get  doctor appointment for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
-    const {docId} = req.body
+    const docId = req.docId;
     const appointments = await appointmentModel.find({ docId });
 
     res.json({ success: true, appointments });
