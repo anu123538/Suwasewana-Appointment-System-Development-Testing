@@ -36,7 +36,7 @@ const DoctorAppointments = () => {
               <p>{index + 1}</p>
               <div>
                 <img src={item.userData.image} alt="" />
-                      <p>{ item.userData.name}</p>
+                <p>{item.userData.name}</p>
               </div>
 
               <div>
