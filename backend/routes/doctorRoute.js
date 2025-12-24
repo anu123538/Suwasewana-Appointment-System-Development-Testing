@@ -5,12 +5,12 @@ import {
 } from "../controllers/doctorController.js";
 import authDoctor from '../middlewares/authDoctor.js';
 
-const doctorRouter = express.Router();
+const router = express.Router();
 
 
-doctorRouter.get("/list", doctorList)
-doctorRouter.post("/login", loginDoctor)
-doctorRouter.post("/change-availability", authDoctor, changeAvailability);
-doctorRouter.get("/appointments", authDoctor, appointmentsDoctor)
+router.get("/list", doctorList)
+router.post("/login", loginDoctor)
+router.post("/change-availability", authDoctor, changeAvailability);
+router.get("/appointments", authDoctor, appointmentsDoctor)
 
-export default doctorRouter;
+export default router;
