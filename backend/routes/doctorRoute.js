@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/list", doctorList)
 router.post("/login", loginDoctor)
-router.get("/change-availability", authDoctor, changeAvailability);
+router.post("/change-availability", authDoctor, changeAvailability)
 router.get("/appointments", authDoctor, appointmentsDoctor)
 
 export default router;
