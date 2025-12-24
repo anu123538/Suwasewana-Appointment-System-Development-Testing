@@ -5,10 +5,10 @@ import appointmentModel from "../models/appointmentModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
-    const docId = req.body.docId;
+    const {doctorId} = req.body
 
-    const docData = await doctorModel.findById(docId);
-    await doctorModel.findByIdAndUpdate(docId, {
+    const docData = await doctorModel.findById(doctorId);
+    await doctorModel.findByIdAndUpdate(doctorId, {
       available: !docData.available,
     });
 
@@ -58,7 +58,7 @@ const loginDoctor = async (req, res) => {
 // API to get  doctor appointment for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
-    const docId = req.docId;
+    const doctorId = req.docId;
     const appointments = await appointmentModel.find({ docId });
 
     res.json({ success: true, appointments });
@@ -67,6 +67,38 @@ const appointmentsDoctor = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+// API to get dashbord data for doctor panel
+const doctorDashboard = async (req, res) => {
+  try {
+    const { doctorId } = req.body;
+    const appointments = await appointmentModel.find({ doctorId });
+    let earnings = 0;
+    appointments.map((item) => {
+      if (item.isCompleted || item.payment) {
+        earnings += item.amount
+      }
+    })
+
+    let patients = []
+    appointments.map((item) => {
+      if (!patients.includes(item.userId)) {
+        patients.push(item.userId)
+      }
+    })
+
+    const dashData = {
+      earnings,
+      appointments: appointments.length,
+      patients: patients.length,
+      latestAppointments: appointments.reverse().slice(0,5)
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
 
 
 export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor };

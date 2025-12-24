@@ -6,12 +6,12 @@ import {
 import authDoctor from '../middlewares/authDoctor.js';
 
 
-const router = express.Router();
+const doctorRouter = express.Router();
 
+doctorRouter.post("/change-availability",  changeAvailability);
+doctorRouter.get("/list", doctorList)
+doctorRouter.post("/login", loginDoctor)
 
-router.get("/list", doctorList)
-router.post("/login", loginDoctor)
-router.post("/change-availability", authDoctor, changeAvailability)
-router.get("/appointments", authDoctor, appointmentsDoctor)
+doctorRouter.get("/appointments", authDoctor, appointmentsDoctor);
 
-export default router;
+export default doctorRouter;
