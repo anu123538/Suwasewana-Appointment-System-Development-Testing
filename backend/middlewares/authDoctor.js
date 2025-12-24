@@ -14,9 +14,7 @@ const authDoctor = (req, res, next) => {
 
     const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
 
-    // Attach userId to request
-    req.docId = decoded.id;
-
+    req.docId = decoded.doctorId; // FIXED (see next error)
     next();
   } catch (error) {
     console.log("JWT ERROR:", error.message);
@@ -26,5 +24,6 @@ const authDoctor = (req, res, next) => {
     });
   }
 };
+
 
 export default authDoctor;
