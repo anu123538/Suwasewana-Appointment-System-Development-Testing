@@ -16,10 +16,10 @@ const authDoctor = (req, res, next) => {
 
     const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
 
-    req.docId = decoded.doctorId; // ✅ store as docId
+    req.docId = decoded.id; // ✅ store as docId
     next();
   } catch (error) {
-    console.log("JWT ERROR:", error.message);
+    console.log(error);
     return res.status(401).json({
       success: false,
       message: "Token Expired. Login Again",
