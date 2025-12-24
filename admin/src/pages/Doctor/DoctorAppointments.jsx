@@ -33,7 +33,7 @@ const DoctorAppointments = () => {
 
           {appointments.map((item, index) => (
             <div key={index}>
-              <p>{index + 1}</p>
+              <p>{index+1}</p>
               <div>
                 <img src={item.userData.image} alt="" />
                 <p>{item.userData.name}</p>
@@ -46,7 +46,7 @@ const DoctorAppointments = () => {
               <p>
                 {slotDateFormat(item.slotDate)}, {item.slotTime}
               </p>
-              <p>{currency(item.amount)}</p>
+              <p>{currency} {item.amount}</p>
               <div>
                 <img src={assets.cancel_icon} alt="" />
                 <img src={assets.tick_icon} alt="" />

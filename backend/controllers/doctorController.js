@@ -5,10 +5,10 @@ import appointmentModel from "../models/appointmentModel.js";
 
 const changeAvailability = async (req, res) => {
   try {
-    const doctorId = req.doctorId;
+    const {docId} = req.body;
 
-    const docData = await doctorModel.findById(doctorId);
-    await doctorModel.findByIdAndUpdate(doctorId, {
+    const docData = await doctorModel.findById(docId);
+    await doctorModel.findByIdAndUpdate(docId, {
       available: !docData.available,
     });
 
@@ -58,7 +58,7 @@ const loginDoctor = async (req, res) => {
 // API to get  doctor appointment for doctor panel
 const appointmentsDoctor = async (req, res) => {
   try {
-    const docId = req.docId; // ✅ matches DB
+    const {docId} = req.body
     const appointments = await appointmentModel.find({ docId });
 
     res.json({ success: true, appointments });

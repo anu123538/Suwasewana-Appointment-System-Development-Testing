@@ -1,11 +1,9 @@
 
-
-// doctor authentication middleware
 import jwt from "jsonwebtoken";
 
 const authDoctor = (req, res, next) => {
   try {
-    const dtoken = req.headers.dtoken;
+    const { dtoken } = req.headers
 
     if (!dtoken) {
       return res.status(401).json({
@@ -14,9 +12,9 @@ const authDoctor = (req, res, next) => {
       });
     }
 
-    const decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
+    const token_decoded = jwt.verify(dtoken, process.env.JWT_SECRET);
 
-    req.docId = decoded.id; // ✅ store as docId
+    req.body.docId= token_decoded.id; // ✅ store as docId
     next();
   } catch (error) {
     console.log(error);
