@@ -2,6 +2,10 @@ import React from "react";
 import { useContext, useEffect } from "react";
 import { DoctorContext } from "../../context/DoctorContext.jsx";
 import { AppContext } from "../../context/AppContext.jsx";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 
 const DoctorProfile = () => {
   const { dToken, profileData, setProfileData, getProfileData, backendUrl } =
