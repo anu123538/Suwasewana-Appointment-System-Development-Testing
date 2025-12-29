@@ -3,28 +3,19 @@ import jwt from "jsonwebtoken";
 // user authentication middleware
 const authUser = (req, res, next) => {
   try {
-    const token = req.headers.token;
-
+    const{token} = req.headers;
     if (!token) {
-      return res.status(401).json({
-        success: false,
-        message: "Not Authorized. Login Again",
-      });
+      return res.json({ success: false, message: "Not authorized Login Again" })
     }
+    const token_decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.body.userId = token_decoded.id
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Attach userId to request
-    req.userId = decoded.id;
-
-    next();
-  } catch (error) {
-    console.log("JWT ERROR:", error.message);
-    return res.status(401).json({
-      success: false,
-      message: "Token Expired. Login Again",
-    });
-  }
-};
-
-export default authUser;
+    next()
+  }catch (error) {
+    console.log(error);
+     res.json({ success: false, message:error.message })
+       
+    }
+}
+   export default authUser
+ 
