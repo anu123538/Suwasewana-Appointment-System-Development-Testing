@@ -13,7 +13,7 @@ const DoctorProfile = () => {
 
   return (
     <div>
-      
+      doctor profile
     </div>
   )
 }
