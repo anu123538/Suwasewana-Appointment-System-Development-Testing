@@ -17,17 +17,18 @@ const DoctorProfile = () => {
   const updateProfile = async () => {
     try {
       const updateData = {
+        doctorId: profileData._id,
         address: profileData.address,
         fees: profileData.fees,
         available: profileData.available,
-      }
+      };
       const { data } = await axios.post(backendUrl + "/api/doctor/update-profile", updateData, {
         headers: { dtoken: dToken },
       })
       if (data.success) {
        toast.success("Profile Updated Successfully")
        setIsEdit(false)
-     getProfileData();
+     await getProfileData();
       }else {
        toast.error(data.message)
       }
