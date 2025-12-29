@@ -106,7 +106,7 @@ const doctorDashboard = async (req, res) => {
 // API to get doctor profile for doctor panel 
 const doctorProfile = async (req, res) => {
   try {
-   const doctorId = req.query.doctorId;
+   const doctorId = req.doctorId;
     const profileData = await doctorModel.findById(doctorId).select(["-password"])
     res.json({ success: true, profileData })
   } catch (error) {
