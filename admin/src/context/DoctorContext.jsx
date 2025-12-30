@@ -52,10 +52,48 @@ const getProfileData = async () => {
     }
   };
 
+const completeAppointment = async(appointmentId) => {
+    try {
+      const { data } = await axios.post(backendUrl + "/api/doctor/complete-appointment", { appointmentId }, { 
+        headers: { dtoken: dToken },
+      });
+      if (data.success) {
+        toast.success(data.message);
+        getAppointments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
 
+
+  const cnacelAppointment = async (appointmentId) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/doctor/cancel-appointment",
+        { appointmentId },
+        {
+          headers: { dtoken: dToken },
+        }
+      );
+      if (data.success) {
+        toast.success(data.message);
+        getAppointments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+  
 
   const value = {
-    dToken,setDToken,backendUrl,appointments,setAppointments,getAppointments,profileData,setProfileData,getProfileData
+    dToken,setDToken,backendUrl,appointments,setAppointments,getAppointments,profileData,setProfileData,getProfileData,completeAppointment,cnacelAppointment
   };
   return (
     <DoctorContext.Provider value={value}>

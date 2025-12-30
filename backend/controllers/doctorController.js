@@ -61,7 +61,7 @@ const appointmentsDoctor = async (req, res) => {
     const doctorId = req.doctorId;
 
     const appointments = await appointmentModel.find({
-      docId: doctorId, // ✅ DB field
+      docId: doctorId, // ✅ correct
     });
 
     res.json({ success: true, appointments });
@@ -125,4 +125,45 @@ const updateDoctorProfile = async (req, res) => {
   }
 }
 
-export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, doctorProfile, updateDoctorProfile }
+// API to mark appointment completed for doctor panel
+const appointmentComplete = async (req, res) => { // Added (req, res)
+  try {
+    const { appointmentId } = req.body;
+    const doctorId = req.doctorId; // Get from middleware for security
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    // Ensure appointment exists and belongs to the logged-in doctor
+    if (appointmentData && appointmentData.docId === doctorId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true });
+      return res.json({ success: true, message: "Appointment Completed" });
+    } else {
+      return res.json({ success: false, message: "Mark Failed: Unauthorized or not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// API to cancel appointment for doctor panel
+const appointmentCancel = async (req, res) => { // Added (req, res)
+  try {
+    const { appointmentId } = req.body;
+    const doctorId = req.doctorId; // Get from middleware for security
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (appointmentData && appointmentData.docId === doctorId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
+      return res.json({ success: true, message: "Appointment Cancelled" });
+    } else {
+      return res.json({ success: false, message: "Cancellation Failed: Unauthorized or not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, doctorProfile, updateDoctorProfile ,doctorDashboard,appointmentComplete,appointmentCancel};
