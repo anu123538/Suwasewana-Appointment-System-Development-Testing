@@ -71,37 +71,6 @@ const appointmentsDoctor = async (req, res) => {
 };
 
 
-// API to get dashbord data for doctor panel
-const doctorDashboard = async (req, res) => {
-  try {
-    const doctorId = req.doctorId;
-
-    const appointments = await appointmentModel.find({
-      docId: doctorId, // ✅ correct
-    });
-
-    let earnings = 0;
-    let patients = new Set();
-
-    appointments.forEach((item) => {
-      if (item.payment || item.isCompleted) {
-        earnings += item.amount;
-      }
-      patients.add(item.userId.toString());
-    });
-
-    const dashData = {
-      earnings,
-      appointments: appointments.length,
-      patients: patients.size,
-      latestAppointments: appointments.reverse().slice(0, 5),
-    };
-
-    res.json({ success: true, dashData });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
 
 // API to get doctor profile for doctor panel 
 const doctorProfile = async (req, res) => {
@@ -165,5 +134,47 @@ const appointmentCancel = async (req, res) => { // Added (req, res)
     res.json({ success: false, message: error.message });
   }
 };
+
+
+
+// API to get dashbord data for doctor panel
+const doctorDashboard = async (req, res) => {
+  try {
+    const doctorId = req.doctorId;
+
+    const appointments = await appointmentModel.find({
+      docId: doctorId, // ✅ correct
+    });
+
+    let earnings = 0;
+   
+
+    appointments.map((item) => {
+  if (item.isCompleted && item.payment) {
+      earnings += item.amount;
+    }
+ })
+
+let patients = []
+   
+appointments.map((item) => {
+  if (!patients.includes(item.userId)) {
+      patients.push(item.userId);
+    }
+})
+
+const dashData = {
+  earnings,
+  Appointments: appointments.length,
+  Patients: patients.length,
+  latestAppointments: appointments.reverse().slice(0,5),
+    }
+    res.json({ success: true, dashData });
+
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
 
 export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, doctorProfile, updateDoctorProfile ,doctorDashboard,appointmentComplete,appointmentCancel};
