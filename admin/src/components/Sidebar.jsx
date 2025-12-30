@@ -24,7 +24,7 @@ const Sidebar = () => {
             to={"/admin-dashboard"}
           >
             <img src={assets.home_icon} alt="" />
-            <p>Dashboard</p>
+            <p className='hidden md:block'>Dashboard</p>
           </NavLink>
 
           <NavLink
