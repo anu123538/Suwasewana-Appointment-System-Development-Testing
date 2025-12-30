@@ -165,8 +165,8 @@ appointments.map((item) => {
 
 const dashData = {
   earnings,
-  Appointments: appointments.length,
-  Patients: patients.length,
+  appointments: appointments.length,
+  patients: patients.length,
   latestAppointments: appointments.reverse().slice(0,5),
     }
     res.json({ success: true, dashData });
