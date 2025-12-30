@@ -70,7 +70,7 @@ const completeAppointment = async(appointmentId) => {
   }
 
 
-  const cnacelAppointment = async (appointmentId) => {
+  const cancelAppointment = async (appointmentId) => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/doctor/cancel-appointment",
@@ -93,7 +93,7 @@ const completeAppointment = async(appointmentId) => {
   
 
   const value = {
-    dToken,setDToken,backendUrl,appointments,setAppointments,getAppointments,profileData,setProfileData,getProfileData,completeAppointment,cnacelAppointment
+    dToken,setDToken,backendUrl,appointments,setAppointments,getAppointments,profileData,setProfileData,getProfileData,completeAppointment,cancelAppointment
   };
   return (
     <DoctorContext.Provider value={value}>
