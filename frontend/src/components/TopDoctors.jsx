@@ -23,9 +23,9 @@ const TopDoctors = () => {
           >
             <img className="bg-green-50 " src={item.image} alt="" />
             <div className="p-4">
-              <div className={`flex items-center gap-2 text-sm text-center ${item.Available ? 'text-green-500' : 'text-gray-500'}`}>
-                <p className={`w-2 h-2 ${item.Available ? 'bg-green-500' : 'bg-gray-500'} rounded-full`}></p>
-                <p>{item.Available ? "Available" : "Not available"}</p>
+              <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : 'text-gray-500'}`}>
+                <p className={`w-2 h-2 ${item.available ? 'bg-green-500' : 'bg-gray-500'} rounded-full`}></p>
+                <p>{item.available ? "Available" : "Not available"}</p>
               </div>
               <p className='text-gray-900 text-lg font-medium'>{item.name}</p>
               <p className='text-gray-600 text-sm'>{item.speciality}</p>
