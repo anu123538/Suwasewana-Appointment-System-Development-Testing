@@ -48,15 +48,15 @@ const RelatedDoctors = ({ speciality, docId }) => {
             <div className="p-4">
               <div
                 className={`flex items-center gap-2 text-sm text-center ${
-                  item.isAvailable ? "text-green-500" : "text-gray-500"
+                  item.available ? "text-green-500" : "text-gray-500" // changed here
                 }`}
               >
                 <p
                   className={`w-2 h-2 ${
-                    item.isAvailable ? "bg-green-500" : "bg-gray-500"
+                    item.available ? "bg-green-500" : "bg-gray-500" // changed here
                   } rounded-full`}
                 ></p>
-                <p>{item.isAvailable ? "Available" : "Not available"}</p>
+                <p>{item.available ? "Available" : "Not available"}</p>
               </div>
 
               <p className="text-gray-900 text-lg font-medium">{item.name}</p>
