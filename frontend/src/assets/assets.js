@@ -93,11 +93,13 @@ export const doctors = [
     speciality: "General physician",
     degree: "MBBS",
     experience: "4 Years",
-    about:"Dr. Deshani Tennakoon is a compassionate and dedicated medical practitioner who is committed to providing quality healthcare services to patients. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a friendly and professional approach. Her priority is to ensure patient comfort, safety, and long-term well-being through ethical and evidence-based medical care.",
+    about:
+      "Dr. Deshani Tennakoon is a compassionate and dedicated medical practitioner who is committed to providing quality healthcare services to patients. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a friendly and professional approach. Her priority is to ensure patient comfort, safety, and long-term well-being through ethical and evidence-based medical care.",
     fees: 2500,
     address: {
       line1: "Nawaloka Hospital PLC",
-      line2: "No. 23, Deshamanya H. K. Dharmadasa Mawatha,Colombo 02, Sri Lanka.",
+      line2:
+        "No. 23, Deshamanya H. K. Dharmadasa Mawatha,Colombo 02, Sri Lanka.",
     },
   },
   {
@@ -107,7 +109,8 @@ export const doctors = [
     speciality: "Gynecologist",
     degree: "MBBS",
     experience: "3+ Years of Clinical Experience",
-    about:"Prof. A. K. Probodhana Ranaweera is a dedicated Obstetrician and Gynaecologist with a strong commitment to delivering comprehensive women’s healthcare. He focuses on preventive medicine, early diagnosis, and effective treatment strategies to ensure the best possible outcomes for patients. His patient-centered approach emphasizes safety, care, and professional excellence throughout all stages of women’s health.",
+    about:
+      "Prof. A. K. Probodhana Ranaweera is a dedicated Obstetrician and Gynaecologist with a strong commitment to delivering comprehensive women’s healthcare. He focuses on preventive medicine, early diagnosis, and effective treatment strategies to ensure the best possible outcomes for patients. His patient-centered approach emphasizes safety, care, and professional excellence throughout all stages of women’s health.",
     fees: 3000,
     address: {
       line1: "Asiri Surgical Hospital",
@@ -121,7 +124,8 @@ export const doctors = [
     speciality: "Dermatologist",
     degree: "MBBS",
     experience: "1 Years",
-    about:"Dr. Amitha Nelumdeniya is a dedicated and compassionate medical practitioner committed to delivering quality healthcare services. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a professional and caring approach. Her practice emphasizes preventive healthcare and patient well-being.",
+    about:
+      "Dr. Amitha Nelumdeniya is a dedicated and compassionate medical practitioner committed to delivering quality healthcare services. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a professional and caring approach. Her practice emphasizes preventive healthcare and patient well-being.",
     fees: 3500,
     address: {
       line1: "Lanka Hospitals ",
@@ -295,14 +299,14 @@ export const doctors = [
   },
   {
     _id: "doc15",
-    name: "Dr. Amelia Hill",
+    name: " Dr. Nayana Perera",
     image: doc15,
     speciality: "Dermatologist",
     degree: "MBBS",
     experience: "1 Years",
     about:
       "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 30,
+    fees: 3000,
     address: {
       line1: "No.59,Colombo",
       line2: "SriLanka",
