@@ -73,10 +73,27 @@ const payAppointment = async (appointmentId) => {
     );
 
     if (data.success) {
+      window.payhere.onCompleted = async function (orderId) {
+        // CALL BACKEND TO UPDATE STATUS
+        try {
+          const response = await axios.post(
+            backendUrl + "/api/user/verify-payment",
+            { appointmentId: orderId },
+            { headers: { token } }
+          );
+          if (response.data.success) {
+            toast.success("Payment successful");
+            getUserAppointments(); // Refresh list
+          }
+        } catch (err) {
+          toast.error("Error updating payment status");
+        }
+      };
+
       window.payhere.startPayment(data.paymentData);
     }
   } catch (error) {
-    toast.error("Payment failed");
+    toast.error("Payment initialization failed");
   }
 };
 
