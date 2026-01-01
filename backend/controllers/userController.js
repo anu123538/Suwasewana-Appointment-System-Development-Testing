@@ -211,8 +211,7 @@ const paymentPayHere = async (req, res) => {
 
         const merchantId = "1233260";
         // Replace with your actual Sandbox Merchant Secret from the PayHere portal
-        const merchantSecret =
-          "MTY2MjI2NTU4OTExODA2NzM2MDM5ODE0NDM4MjIyNDc5ODE5OTMz"; 
+        const merchantSecret = "MTY2MjI2NTU4OTExODA2NzM2MDM5ODE0NDM4MjIyNDc5ODE5OTMz"; 
         
         // 1. Hash the secret first
         const hashedSecret = crypto.createHash('md5').update(merchantSecret).digest('hex').toUpperCase();
