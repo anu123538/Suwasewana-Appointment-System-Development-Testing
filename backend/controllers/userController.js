@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
-import crypto from "crypto";
+import crypto from "node:crypto";
+
+
 
 // Register User
 const registerUser = async (req, res) => {
@@ -197,62 +199,58 @@ const cancelAppointment = async (req, res) => {
 };
 
 
+// paymentPayHere integration
 const paymentPayHere = async (req, res) => {
-  try {
-    const { appointmentId } = req.body;
-    const appointment = await appointmentModel.findById(appointmentId);
+    try {
+        const { appointmentId } = req.body;
+        const appointment = await appointmentModel.findById(appointmentId);
 
-    if (!appointment || appointment.cancelled) {
-      return res.json({ success: false, message: "Invalid appointment" });
+        if (!appointment || appointment.cancelled) {
+            return res.json({ success: false, message: "Invalid appointment" });
+        }
+
+        const merchantId = "1233260";
+        // Replace with your actual Sandbox Merchant Secret from the PayHere portal
+        const merchantSecret = "MTY2MjI2NTU4OTExODA2NzM2MDM5ODE0NDM4MjIyNDc5ODE5OTMz"; 
+        
+        // 1. Hash the secret first
+        const hashedSecret = crypto.createHash('md5').update(merchantSecret).digest('hex').toUpperCase();
+        
+        // 2. Format amount to 2 decimal places
+        const amountFormatted = parseFloat(appointment.amount).toFixed(2);
+        const currency = "LKR";
+
+        // 3. Generate final hash using correct order: MerchantID + OrderID + Amount + Currency + HashedSecret
+        const hash = crypto.createHash('md5')
+                           .update(merchantId + appointmentId + amountFormatted + currency + hashedSecret)
+                           .digest('hex')
+                           .toUpperCase();
+
+        const paymentData = {
+            sandbox: true,
+            merchant_id: merchantId,
+            return_url: "https://suwasewana-vgqa.vercel.app/my-appointments",
+            cancel_url: "https://suwasewana-vgqa.vercel.app/my-appointments",
+            notify_url: "https://suwasewana.vercel.app/api/user/payment-notify",
+            order_id: appointmentId,
+            items: "Doctor Appointment",
+            amount: amountFormatted,
+            currency: currency,
+            hash: hash,
+            first_name: appointment.userData.name,
+            last_name: "",
+            email: appointment.userData.email,
+            phone: appointment.userData.phone || "0771234567",
+            address: "Colombo",
+            city: "Colombo",
+            country: "Sri Lanka",
+        };
+
+        res.json({ success: true, paymentData });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
     }
-
-    const merchantId = "1233260";
-    const merchantSecret =
-      "MTY2MjI2NTU4OTExODA2NzM2MDM5ODE0NDM4MjIyNDc5ODE5OTMz"; // Use the secret from your image
-    const hashedSecret = crypto
-      .createHash("md5")
-      .update(merchantSecret)
-      .digest("hex")
-      .toUpperCase();
-    const amountFormatted = parseFloat(appointment.amount).toFixed(2);
-    const currency = "LKR";
-
-    // Create the hash for security
-    const hash = crypto
-      .createHash("md5")
-      .update(
-        merchantId + appointmentId + amountFormatted + currency + hashedSecret
-      )
-      .digest("hex")
-      .toUpperCase();
-
-    const paymentData = {
-      sandbox: true,
-      merchant_id: merchantId,
-      return_url: "https://suwasewana-vgqa.vercel.app/my-appointments", // Match your hosted domain
-      cancel_url: "https://suwasewana-vgqa.vercel.app/my-appointments",
-      notify_url: "https://suwasewana.vercel.app/api/user/payment-notify", // Webhook
-      order_id: appointmentId,
-      items: "Doctor Appointment",
-      amount: amountFormatted,
-      currency: currency,
-      hash: hash, // Added hash for authorization
-      first_name: appointment.userData.name,
-      last_name: "",
-      email: appointment.userData.email,
-      phone: appointment.userData.phone || "0771234567",
-      address: "Colombo",
-      city: "Colombo",
-      country: "Sri Lanka",
-    };
-
-    res.json({ success: true, paymentData });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
 };
-
-
 // API to verify payment
 const verifyPayment = async (req, res) => {
     try {
