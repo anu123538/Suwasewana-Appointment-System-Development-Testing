@@ -254,52 +254,53 @@ export const doctors = [
   },
   {
     _id: "doc12",
-    name: "Dr. Patrick Harris",
+    name: "Dr. Chamara Perera",
     image: doc12,
     speciality: "Neurologist",
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Experienced in treating neurological disorders including migraines, epilepsy, and stroke rehabilitation.",
+    fees: 5000,
     address: {
-      line1: "57th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "12/4 Kynsey Road",
+      line2: "Colombo 08, Sri Lanka",
     },
   },
   {
     _id: "doc13",
-    name: "Dr. Chloe Evans",
+    name: "Dr. Nadeeka Wijesinghe",
     image: doc13,
     speciality: "General physician",
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Provides comprehensive general health checkups, chronic disease management, and preventive care.",
+    fees: 2500,
     address: {
-      line1: "17th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "45 Ward Place",
+      line2: "Colombo 07, Sri Lanka",
     },
   },
   {
     _id: "doc14",
-    name: "Dr. Ryan Martinez",
+    name: "Dr. Machintha Paranayapa",
     image: doc14,
     speciality: "Gynecologist",
     degree: "MBBS",
     experience: "3 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 60,
+      "Provides women’s health care including pregnancy care, routine gynecological exams, and family planning.",
+    fees: 4500,
     address: {
-      line1: "27th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "T.B jayah Mawatha",
+      line2: " Colombo 10, Sri Lanka",
     },
   },
+
   {
     _id: "doc15",
-    name: " Dr. Nayana Perera",
+    name: "Dr. Nayana Perera",
     image: doc15,
     speciality: "Dermatologist",
     degree: "MBBS",
@@ -308,8 +309,10 @@ export const doctors = [
       "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
     fees: 3000,
     address: {
-      line1: "No.59,Colombo",
-      line2: "SriLanka",
+      line1: "No. 59, Colombo",
+      line2: "Sri Lanka",
+     
+
     },
   },
 ];
