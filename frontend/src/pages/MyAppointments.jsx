@@ -4,6 +4,10 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { useState } from 'react'
+ HEAD
+
+
+main
 
 
 
@@ -62,11 +66,62 @@ const MyAppointments = () => {
       toast.error(error.message)
     }
   }
+
+const payAppointment = async (appointmentId) => {
+  try {
+    const { data } = await axios.post(
+      backendUrl + "/api/user/payment-payhere",
+      { appointmentId },
+      { headers: { token } }
+    );
+
+    if (data.success) {
+      window.payhere.onCompleted = async function (orderId) {
+        // CALL BACKEND TO UPDATE STATUS
+        try {
+          const response = await axios.post(
+            backendUrl + "/api/user/verify-payment",
+            { appointmentId: orderId },
+            { headers: { token } }
+          );
+          if (response.data.success) {
+            toast.success("Payment successful");
+            getUserAppointments(); // Refresh list
+          }
+        } catch (err) {
+          toast.error("Error updating payment status");
+        }
+      };
+
+      window.payhere.startPayment(data.paymentData);
+    }
+  } catch (error) {
+    toast.error("Payment initialization failed");
+  }
+};
+
+
   useEffect(() => {
     if(token)
     // eslint-disable-next-line react-hooks/set-state-in-effect
     getUserAppointments()
   }, [token])
+
+
+  useEffect(() => {
+    // PayHere payment completion handler
+    window.payhere.onCompleted = function (orderId) {
+  alert("Payment Successful! Order ID: " + orderId);
+};
+
+window.payhere.onDismissed = function () {
+  alert("Payment cancelled");
+};
+
+window.payhere.onError = function (error) {
+  alert("Payment error: " + error);
+};
+  }, []);
 
 
 
@@ -90,13 +145,38 @@ const MyAppointments = () => {
       </div>
       <div>
 
+     <div className='flex flex-col gap-2 justify-end'>
+
+  {!item.cancelled && !item.isCompleted && (
+    <>
+      <button onClick={() => payAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-primary hover:text-white transition-all duration-300'>
+        Pay Online
+      </button>
+
+      <button
+        onClick={() => CancelAppointment(item._id)}
+        className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300'
+      >
+        Cancel Appointment
+      </button>
+    </>
+  )}
+
+  {item.cancelled && !item.isCompleted && (
+    <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>
+      Appointment Cancelled
+    </button>
+                )}
+  {item.isCompleted && 
+    <button className='sm:min-w-48 py-2 border border-green-500 rounded text-green-500'>
+      Appointment Completed
+    </button>
+                }
+
+</div>
+
+    </div>
         </div>
-        <div className='flex flex-col gap-2 justify-end'>
-         {item.cancelled && <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border  hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>} 
-         {item.cancelled && <button onClick ={() => CancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>}
-         {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500 rounded text-red-500'>Appointment Cancelled</button>}
-          </div>
-      </div>
         ))}
       </div>
     </div>

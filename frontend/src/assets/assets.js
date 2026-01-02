@@ -88,47 +88,48 @@ export const specialityData = [
 export const doctors = [
   {
     _id: "doc1",
-    name: "Dr. Richard James",
+    name: "Dr. DESHANI TENNAKOON",
     image: doc1,
     speciality: "General physician",
     degree: "MBBS",
     experience: "4 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Dr. Deshani Tennakoon is a compassionate and dedicated medical practitioner who is committed to providing quality healthcare services to patients. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a friendly and professional approach. Her priority is to ensure patient comfort, safety, and long-term well-being through ethical and evidence-based medical care.",
+    fees: 2500,
     address: {
-      line1: "17th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Nawaloka Hospital PLC",
+      line2:
+        "No. 23, Deshamanya H. K. Dharmadasa Mawatha,Colombo 02, Sri Lanka.",
     },
   },
   {
     _id: "doc2",
-    name: "Dr. Emily Larson",
+    name: "Prof. A. K. PROBHODANA RANAWEERA",
     image: doc2,
     speciality: "Gynecologist",
     degree: "MBBS",
-    experience: "3 Years",
+    experience: "3+ Years of Clinical Experience",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 60,
+      "Prof. A. K. Probodhana Ranaweera is a dedicated Obstetrician and Gynaecologist with a strong commitment to delivering comprehensive women’s healthcare. He focuses on preventive medicine, early diagnosis, and effective treatment strategies to ensure the best possible outcomes for patients. His patient-centered approach emphasizes safety, care, and professional excellence throughout all stages of women’s health.",
+    fees: 3000,
     address: {
-      line1: "27th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Asiri Surgical Hospital",
+      line2: "Kirimandala Mw - Colombo 05",
     },
   },
   {
     _id: "doc3",
-    name: "Dr. Sarah Patel",
+    name: "Dr (Ms.) AMITHA NELUMDENIYA;",
     image: doc3,
     speciality: "Dermatologist",
     degree: "MBBS",
     experience: "1 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 30,
+      "Dr. Amitha Nelumdeniya is a dedicated and compassionate medical practitioner committed to delivering quality healthcare services. She focuses on accurate diagnosis, patient education, and effective treatment plans while maintaining a professional and caring approach. Her practice emphasizes preventive healthcare and patient well-being.",
+    fees: 3500,
     address: {
-      line1: "37th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Lanka Hospitals ",
+      line2: "Colombo 05",
     },
   },
   {
@@ -296,19 +297,22 @@ export const doctors = [
       line2: " Colombo 10, Sri Lanka",
     },
   },
+
   {
     _id: "doc15",
-    name: "Dr. Shalini Wijesinghe",
+    name: "Dr. Nayana Perera",
     image: doc15,
     speciality: "Dermatologist",
     degree: "MBBS",
     experience: "1 Years",
     about:
-      "Focuses on skin rejuvenation, laser therapy, and anti-aging treatments.",
-    fees: 5000,
+      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+    fees: 3000,
     address: {
-      line1: "No. 45, Main Street",
-      line2: "Colombo 03, Sri Lanka",
+      line1: "No. 59, Colombo",
+      line2: "Sri Lanka",
+     
+
     },
   },
 ];
