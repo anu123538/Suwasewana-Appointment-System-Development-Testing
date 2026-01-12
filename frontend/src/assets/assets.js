@@ -134,62 +134,62 @@ export const doctors = [
   },
   {
     _id: "doc4",
-    name: "Dr. Christopher Lee",
+    name: "Prof. ASIRI ABEYAGUNAWARDENA",
     image: doc4,
     speciality: "Pediatricians",
     degree: "MBBS",
     experience: "2 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 40,
+      "Prof. ASIRI ABEYAGUNAWARDENA has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+    fees: 4000,
     address: {
-      line1: "47th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Amaya Medical Consultations (Pvt) Ltd ",
+      line2: "Kandy",
     },
   },
   {
     _id: "doc5",
-    name: "Dr. Jennifer Garcia",
+    name: "Dr. SRINI GODEVITHANAGE",
     image: doc5,
     speciality: "Neurologist",
     degree: "MBBS",
-    experience: "4 Years",
+    experience: "2 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Dr. SRINI GODEVITHANAGE has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. SRINI GODEVITHANAGE has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+    fees: 2500,
     address: {
-      line1: "57th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Amaya Medical Consultations (Pvt) Ltd",
+      line2: "Kandy",
     },
   },
   {
     _id: "doc6",
-    name: "Dr. Andrew Williams",
+    name: "Dr. GAMINI PATHIRANA",
     image: doc6,
     speciality: "Neurologist",
     degree: "MBBS",
-    experience: "4 Years",
+    experience: "3 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Dr. GAMINI PATHIRAN has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. GAMINI PATHIRANA has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+    fees: 5000,
     address: {
-      line1: "57th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Asiri Central Hospital ",
+      line2: "Norris Canal Road-Colombo 10",
     },
   },
   {
     _id: "doc7",
-    name: "Dr. Christopher Davis",
+    name: "Dr. T. KESAVAN",
     image: doc7,
-    speciality: "General physician",
+    speciality: "Gastroenterologist",
     degree: "MBBS",
-    experience: "4 Years",
+    experience: "2 Years",
     about:
-      "Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
-    fees: 50,
+      "Dr. T. KESAVAN has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.",
+    fees: 3500,
     address: {
-      line1: "17th Cross, Richmond",
-      line2: "Circle, Ring Road, London",
+      line1: "Arogya Channelled Consultation Center Kegalle (Pvt) Ltd",
+      line2: "Gampaha",
     },
   },
   {
@@ -311,8 +311,6 @@ export const doctors = [
     address: {
       line1: "No. 59, Colombo",
       line2: "Sri Lanka",
-     
-
     },
   },
 ];
