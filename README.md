@@ -33,11 +33,17 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 During cross-browser testing, a high-severity issue was identified on Microsoft Edge.
 
 **Bug ID:** BUG-001 
+
 **Title:** Web application elements are unresponsive on Microsoft Edge.
-* **Severity:** High
+
+**Severity:** High
+
 * **Priority:** Medium.
+  
 **Environment:** Browser: Edge v125.0, OS: Windows 11.
+  
 **Actual Result:** System displays "Request failed with status code 401" and buttons are unresponsive.
+
 **Expected Result:** Users should be able to book appointments as successfully as on Chrome.
 
 ## 🤖 Playwright Automation output
