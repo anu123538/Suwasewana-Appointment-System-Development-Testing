@@ -19,7 +19,7 @@ public class suwasewana {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         try {
-            // 1. වෙබ් අඩවියට පිවිසීම
+            // 1go to website
             driver.get("https://suwasewana-vgqa.vercel.app/");
             driver.manage().window().maximize();
 
@@ -27,7 +27,7 @@ public class suwasewana {
             WebElement navCreateBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Create Account')]")));
             navCreateBtn.click();
 
-            // 3. Form Fill කිරීම (අහඹු Email එකක් සමඟ)
+            // 3. Form Fill 
             String email = "sadu" + System.currentTimeMillis() + "@gmail.com";
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/form/div/div[1]/input"))).sendKeys("vindya");
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/form/div/div[2]/input")).sendKeys(email);
@@ -35,43 +35,43 @@ public class suwasewana {
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/form/div/button")).click();
             System.out.println("✅ Account creation submitted!");
 
-            // 4. Book Appointment Click කිරීම
+            // 4. Book Appointment Click 
             WebElement bookAppointmentBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div[1]/a")));
             bookAppointmentBtn.click();
 
-            // 5. Doctor තේරීම
+            // 5. Doctor selection
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Doctors')] | //p[contains(text(),'doctors')]")));
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[3]/div/div[1]/img")).click();
             System.out.println("✅ Selected a doctor.");
 
-            // 6. දිනය සහ වේලාව
+            // 6. select date and time
             Thread.sleep(3000);
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/div[4]"))).click();
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/p[2]")).click();
 
-            // 7. Booking Confirm කිරීම
+            // 7. Booking Confirm
             WebElement finalBookBtn = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/button"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", finalBookBtn);
             Thread.sleep(1000);
             finalBookBtn.click();
             System.out.println("✅ Appointment booked successfully!");
 
-            // 8. My Appointments පිටුවට යාම
+            // 8. go  My Appointments page
             Thread.sleep(2000);
             driver.get("https://suwasewana-vgqa.vercel.app/my-appointments");
             System.out.println("✅ Navigated to My Appointments.");
 
-            // 9. Appointment එක තිබේදැයි බලා එය Cancel කිරීම
+            // 9. to check Appointment and cancel
             WebElement cancelBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(),'Cancel')])[1]")));
 
             if (cancelBtn.isDisplayed()) {
                 System.out.println("✅ Verification Successful: Appointment found.");
 
-                // Cancel කිරීම
+                // Cancel 
                 ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cancelBtn);
                 System.out.println("✅ Appointment cancel button clicked.");
 
-                // 10. Status එක Cancelled ද කියා පරීක්ෂා කිරීම
+                // 10.to check status is cancel
                 WebElement status = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Cancelled') or contains(text(),'cancelled')]")));
                 System.out.println("✅ TEST PASSED: Status is " + status.getText());
             }
@@ -85,4 +85,5 @@ public class suwasewana {
             driver.quit();
         }
     }
+
 }
