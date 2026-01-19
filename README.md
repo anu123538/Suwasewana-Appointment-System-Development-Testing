@@ -58,13 +58,14 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 
 ## ⚙️ Installation & Execution
 
-1. **Clone the Repo:** `git clone https://github.com/anu123538/Suwasewana-Appointment-System-Development-Testing
+1. **Clone the Repo:** git clone https://github.com/anu123538/Suwasewana-Appointment-System-Development-Testing
 2. **Install Dependencies:** `npm install`
 3. **Run Tests:** `npx playwright test --headed`
 4. **View Report:** `npx playwright show-report`
 
 
 **Author:** Anuththra
+
 **Role:** QA Automation Engineer (Intern)
 
 
