@@ -19,7 +19,7 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 * **Automation:** Playwright (Node.js), Selenium.
 * **Performance:** Apache JMeter.
 * **Language:** JavaScript / Java.
-* 
+  
 **Documentation:** Manual Test Cases & Professional Bug Reporting.
 
 ## 📑 Manual Testing Documentation
@@ -38,7 +38,7 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 
 **Severity:** High
 
-* **Priority:** Medium.
+ **Priority:** Medium.
   
 **Environment:** Browser: Edge v125.0, OS: Windows 11.
   
