@@ -6,7 +6,7 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 ## 🚀 Project Overview
 
 
-**Target Application:** [Suwasewana Web App](https://suwasewana-vgqa.vercel.app/).
+**Target Application:** (https://suwasewana-vgqa.vercel.app/).
 
 
 * **Objective:** To ensure a bug-free user journey from registration to appointment confirmation.
@@ -34,7 +34,8 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 
 **Bug ID:** BUG-001 
 **Title:** Web application elements are unresponsive on Microsoft Edge.
-* **Severity:** High | **Priority:** Medium.
+* **Severity:** High
+* **Priority:** Medium.
 **Environment:** Browser: Edge v125.0, OS: Windows 11.
 **Actual Result:** System displays "Request failed with status code 401" and buttons are unresponsive.
 **Expected Result:** Users should be able to book appointments as successfully as on Chrome.
