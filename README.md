@@ -8,17 +8,14 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 
 ## 🚀 Project Overview
 
-* 
+
 **Target Application:** [Suwasewana Web App](https://suwasewana-vgqa.vercel.app/).
 
 
 * **Objective:** To ensure a bug-free user journey from registration to appointment confirmation.
-* 
+
 **Key Features Tested:** User Authentication, Doctor Selection, Slot Booking, and Appointment Cancellation.
 
-
-
----
 
 ## 🛠 Tech Stack
 
@@ -28,78 +25,22 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 * 
 **Documentation:** Manual Test Cases & Professional Bug Reporting.
 
-
-
----
-
 ## 📑 Manual Testing Documentation
 
 ### 1. Test Cases Summary
 
-I designed and executed functional test cases covering the entire booking flow.
 
-| TC ID | Test Scenario | Expected Result | Status |
-| --- | --- | --- | --- |
-| **01** | User Registration | Account created and user logged in successfully.
-
- | ✅ PASS 
-
- |
-| **02** | Doctor Selection | Doctor's profile page should load correctly.
-
- | ✅ PASS 
-
- |
-| **03** | Slot Selection | Date and Time slots should be highlighted and selected.
-
- | ✅ PASS 
-
- |
-| **04** | Confirm Booking | Appointment should be confirmed in the system.
-
- | ✅ PASS 
-
- |
-| **05** | View Records | Booking record should be visible in 'My Appointments'.
-
- | ✅ PASS 
-
- |
-| **06** | Cancellation | Status must update to 'Cancelled' upon clicking cancel.
-
- | ✅ PASS 
-
- |
 
 ### 2. Bug Report (Defect Tracking)
 
 During cross-browser testing, a high-severity issue was identified on Microsoft Edge.
 
-* 
 **Bug ID:** BUG-001 
-
-
-* 
 **Title:** Web application elements are unresponsive on Microsoft Edge.
-
-
 * **Severity:** High | **Priority:** Medium.
-
-
-* 
 **Environment:** Browser: Edge v125.0, OS: Windows 11.
-
-
-* 
 **Actual Result:** System displays "Request failed with status code 401" and buttons are unresponsive.
-
-
-* 
 **Expected Result:** Users should be able to book appointments as successfully as on Chrome.
-
-
-
----
 
 ## 🤖 Playwright Automation output
 
@@ -111,8 +52,6 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 * **Scenario:** Simulated 100+ concurrent users booking appointments.
 * **Goal:** To identify server response times and threshold limits for the Suwasewana API.
 
----
-
 ## ⚙️ Installation & Execution
 
 1. **Clone the Repo:** `git clone <your-repo-url>`
@@ -120,10 +59,8 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 3. **Run Tests:** `npx playwright test --headed`
 4. **View Report:** `npx playwright show-report`
 
----
 
 **Author:** Anuththra
 **Role:** QA Automation Engineer (Intern)
 
----
 
