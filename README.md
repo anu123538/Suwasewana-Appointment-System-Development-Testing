@@ -1,6 +1,3 @@
-This is a professional, complete **README.md** file for your GitHub portfolio. I have integrated your specific Test Cases, Bug Report, and Playwright code into a clean English format that will impress any recruiter or interviewer.
-
----
 
 # 🩺 Suwasewana Healthcare - QA Automation & Manual Testing Project
 
@@ -28,7 +25,7 @@ This repository showcases a comprehensive Quality Assurance (QA) suite for the *
 ## 📑 Manual Testing Documentation
 
 ### 1. Test Cases Summary
-
+<img width="602" height="336" alt="Screenshot 2026-01-19 185936" src="https://github.com/user-attachments/assets/68896325-0f2e-445f-a7ad-78fa347a9c90" />
 
 
 ### 2. Bug Report (Defect Tracking)
