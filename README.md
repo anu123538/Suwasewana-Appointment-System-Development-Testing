@@ -63,6 +63,11 @@ During cross-browser testing, a high-severity issue was identified on Microsoft 
 3. **Run Tests:** `npx playwright test --headed`
 4. **View Report:** `npx playwright show-report`
 
+   CI/CD Pipelines
+
+   <img width="1365" height="491" alt="image" src="https://github.com/user-attachments/assets/0917ceb8-a60a-49db-ab6b-87941a943a33" />
+
+
 
 **Author:** Anuththra
 
