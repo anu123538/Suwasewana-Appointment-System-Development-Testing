@@ -1,18 +1,15 @@
-name: Selenium CI/CD Pipeline
+name: Selenium CI
 
 on:
   push:
-    branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -21,9 +18,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Setup Chrome for Selenium
-      uses: browser-actions/setup-chrome@latest
-
-    - name: Build and Run Tests
-      # මෙතන 'mvn test' එකෙන් ඔයාගේ ඔක්කොම Unit tests සහ Selenium tests ටික run වෙනවා
-      run: mvn -B test
+    - name: Build and Test with Maven
+      # මෙතන 'tesing suwasewana' කියන්නේ ඔයාගේ Folder එකේ නම. 
+      # Folder එකේ නමේ 'tesing' කියලා spelling වැරදියට තියෙන නිසා ඒක ඒ විදියටම මෙතනට දාන්න ඕනේ.
+      run: mvn -B test --file "tesing suwasewana/pom.xml"
